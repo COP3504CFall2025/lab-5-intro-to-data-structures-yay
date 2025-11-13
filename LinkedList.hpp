@@ -14,16 +14,18 @@ public:
 	};
 	// Behaviors
 	void printForward() const{
-		while(head->next != nullptr){
-			std::cout << head->data << endl;
-			head = head->next;
-		};
+		Node* current = head;
+		while(current != nullptr){
+			std::cout << current->data << endl;
+			current = current->next;
+		}
 	};
 	void printReverse() const{
-		while(tail->prev != nullptr){
-			std::cout << tail->data << endl;
-			tail = tail->prev;
-		};
+		Node* current = tail;
+		while(current != nullptr){
+			std::cout << current->data << endl;
+			current = current->prev;
+		}
 	};
 
 	// Accessors
@@ -63,23 +65,32 @@ public:
 
 	// Removal
 	bool removeHead(){
-		if (head != nullptr){
-			delete head;
-			head = head->next;
-			count--;
-		};
+		if (head == nullptr) return false;
+		Node* temp = head;
+		head = head->next;
+		if (head) head->prev = nullptr;
+		else tail = nullptr;
+		delete temp;
+		count--;
+		return true;
 	};
 	bool removeTail(){
-		if (tail != nullptr){
-			delete tail;
-			tail = tail->prev;
-			count--;
-		};
+		if (tail == nullptr) return false;
+		Node* temp = tail;
+		tail = tail->prev;
+		if (tail) tail->next = nullptr;
+		else head = nullptr;
+		delete temp;
+		count--;
+		return true;
 	};
 	void Clear(){
-		while(head->next != nullptr){
+		while(head != nullptr){
 			removeHead();
-		};
+		}
+	};
+	void clear(){
+		Clear();
 	};
 
 	// Operators
