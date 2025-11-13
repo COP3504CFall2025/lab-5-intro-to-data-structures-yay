@@ -51,6 +51,8 @@ public:
 		newHead->data = data;
 		newHead->next = head;
 		newHead->prev = nullptr;
+		if (head) head->prev = newHead;
+		else tail = newHead;
 		head = newHead;
 		count++;
 	};
@@ -59,6 +61,8 @@ public:
 		newTail->data = data;
 		newTail->next = nullptr;
 		newTail->prev = tail;
+		if (tail) tail->next = newTail;
+		else head = newTail;
 		tail = newTail;
 		count++;
 	};
@@ -98,7 +102,9 @@ public:
 		if(this == &other){
 			return *this;
 		}
-		Clear();
+		if(head != nullptr){
+			Clear();
+		}
 		head = other.head;
 		tail = other.tail;
 		count = other.count;
@@ -111,7 +117,9 @@ public:
 		if(this == &rhs){
 			return *this;
 		}
-		Clear();
+		if(head != nullptr){
+			Clear();
+		}
 		head = nullptr;
 		tail = nullptr;
 		count = 0;
