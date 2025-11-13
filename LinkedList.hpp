@@ -95,21 +95,20 @@ public:
 
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept{
-		if(head != nullptr){
-			Clear();
-		}
-		if(this == other){
+		if(this == &other){
 			return *this;
 		}
+		Clear();
 		head = other.head;
 		tail = other.tail;
 		count = other.count;
 		other.head = nullptr;
 		other.tail = nullptr;
 		other.count = 0;
+		return *this;
 	};
 	LinkedList<T>& operator=(const LinkedList<T>& rhs){
-		if (this == &rhs) {
+		if(this == &rhs){
 			return *this;
 		}
 		Clear();
@@ -117,16 +116,11 @@ public:
 		tail = nullptr;
 		count = 0;
 		Node* current = rhs.head;
-		int noHead = 0;
 		while (current != nullptr) {
 			addTail(current->data);
-			if(noHead == 0){
-				head = tail;
-				noHead = 1;
-			}
 			current = current->next;
-			count++;
-		};
+		}
+		return *this;
 	};
 
 	// Construction/Destruction
