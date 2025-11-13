@@ -94,8 +94,40 @@ public:
 	};
 
 	// Operators
-	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept;
-	LinkedList<T>& operator=(const LinkedList<T>& rhs);
+	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept{
+		if(head != nullptr){
+			Clear();
+		}
+		if(this == other){
+			return *this;
+		}
+		head = other.head;
+		tail = other.tail;
+		count = other.count;
+		other.head = nullptr;
+		other.tail = nullptr;
+		other.count = 0;
+	};
+	LinkedList<T>& operator=(const LinkedList<T>& rhs){
+		if (this == &rhs) {
+			return *this;
+		}
+		Clear();
+		head = nullptr;
+		tail = nullptr;
+		count = 0;
+		Node* current = rhs.head;
+		int noHead = 0;
+		while (current != nullptr) {
+			addTail(current->data);
+			if(noHead == 0){
+				head = tail;
+				noHead = 1;
+			}
+			current = current->next;
+			count++;
+		};
+	};
 
 	// Construction/Destruction
 	LinkedList(){
