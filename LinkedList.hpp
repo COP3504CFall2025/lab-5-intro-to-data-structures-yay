@@ -140,7 +140,7 @@ public:
 	LinkedList(const LinkedList<T>& list){
 		head = nullptr;
 		tail = nullptr;
-		count = 0;
+		count = list.count;
 		Node* current = list.head;
 		int noHead = 0;
 		while (current != nullptr) {
@@ -150,7 +150,6 @@ public:
 				noHead = 1;
 			}
 			current = current->next;
-			count++;
 		};
 	};
 	LinkedList(LinkedList<T>&& other) noexcept{
