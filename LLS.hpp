@@ -22,6 +22,9 @@ public:
 
     // Deletion
     T pop() override{
+        if (list.getCount() == 0){
+            throw std::runtime_error("Empty stack");
+        }
         T data = list.getHead()->data;
         list.removeHead();
         return data;
@@ -29,6 +32,9 @@ public:
 
     // Access
     T peek() const override{
+        if (list.getCount() == 0){
+            throw std::runtime_error("Empty stack");
+        }
         return list.getHead()->data;
     };
 
