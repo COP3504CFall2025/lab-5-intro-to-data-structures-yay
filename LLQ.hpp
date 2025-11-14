@@ -13,7 +13,7 @@ public:
     // Constructor
     LLQ(){
         list = LinkedList<T>();
-    };;
+    };
 
     // Insertion
     void enqueue(const T& item) override{
