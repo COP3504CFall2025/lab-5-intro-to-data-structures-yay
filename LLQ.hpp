@@ -23,8 +23,8 @@ public:
     // Deletion
     T dequeue() override{
         if (list.getCount() == 0){ 
-            throw std::runtime_error("Empty queue")
-        };
+            throw std::runtime_error("Empty queue");
+        }
         T data = list.getHead()->data;
         list.removeHead();
         return data;
