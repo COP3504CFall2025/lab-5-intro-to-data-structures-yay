@@ -118,18 +118,6 @@ public:
         }
         T data = array_[curr_size_ - 1];
         curr_size_--;
-        
-        if (curr_size_ <= capacity_ / 2 && capacity_ > 1) {
-            size_t new_capacity = capacity_ / scale_factor_;
-            T* temp = new T[new_capacity];
-            for (size_t i = 0; i < curr_size_; ++i) {
-                temp[i] = array_[i];
-            }
-            delete[] array_;
-            array_ = temp;
-            capacity_ = new_capacity;
-        }
-        
         return data;
     };
 
